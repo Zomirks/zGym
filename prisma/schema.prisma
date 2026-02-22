@@ -17,8 +17,20 @@ model User {
   updatedAt     DateTime  @updatedAt
   accounts      Account[]
   sessions      Session[]
+  weightEntries WeightEntry[]
 
   @@map("user")
+}
+
+model WeightEntry {
+	id String @id
+	weight Float
+	date DateTime @default(now())
+	note String?
+	userId String
+	user User @relation(fields: [userId], references: [id])
+	
+	@@index([userId, date])
 }
 
 model Session {
