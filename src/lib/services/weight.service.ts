@@ -1,9 +1,10 @@
 import prisma from "../prisma";
 
-export async function getWeightEntries(userId: string) {
+export async function getWeightEntries(userId: string, limit?: number) {
 	const entries = await prisma.weightEntry.findMany({
 		where: { userId },
 		orderBy: { date: "desc" },
+		take: limit,
 	});
 	return entries;
 }

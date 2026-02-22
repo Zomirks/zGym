@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 
 import WeightCalendar from "@/components/shared/weight/WeightCalendar";
 import WeightForm from "@/components/shared/weight/WeightForm";
+import WeightLastEntries from "@/components/shared/weight/WeightLastEntries";
 
 const Dashboard = async () => {
 	const session = await auth.api.getSession({
@@ -34,11 +35,12 @@ const Dashboard = async () => {
 				</div>
 
 				<div>
-				<WeightForm />
+					<WeightForm />
 				</div>
 
 				<div className="flex flex-col gap-4">
 					<WeightCalendar />
+					<WeightLastEntries />
 				</div>
 			</div>
 		</div>

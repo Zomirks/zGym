@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 import { addWeightEntry, getWeightEntries } from "@/lib/services/weight.service";
 import { auth } from "@/lib/auth";
 
-export async function GET() {
+export async function GET(request: Request) {
 	const session = await auth.api.getSession({
 		headers: await headers(),
 	});
@@ -12,7 +12,10 @@ export async function GET() {
 		return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
 	}
 
-	const weightEntries = await getWeightEntries(session.user.id);
+	const { searchParams } = new URL(request.url);
+	const limit = searchParams.get("limit") ? Number(searchParams.get("limit")) : undefined;
+
+	const weightEntries = await getWeightEntries(session.user.id, limit);
 
 	return NextResponse.json(weightEntries);
 }
