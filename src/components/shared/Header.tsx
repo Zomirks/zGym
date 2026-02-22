@@ -9,8 +9,6 @@ const Header = () => {
 	const { data: session } = useSession();
 	const name = session?.user.name;
 
-	console.log("session", session);
-
 	return (
 		<header className="h-11 flex items-center px-4">
 			<div className="flex flex-1 gap-4">

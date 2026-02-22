@@ -16,7 +16,7 @@ export default function WeightForm() {
 	const [note, setNote] = useState("");
 	const [date, setDate] = useState<Date>(new Date());
 	const [loading, setLoading] = useState(false);
-	const [error, setError] = useState("");
+	const [error, setError] = useState<string | null>(null);
 
 	async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
 		e.preventDefault();
