@@ -10,12 +10,15 @@ export async function getWeightEntries(userId: string, limit?: number) {
 }
 
 export async function addWeightEntry(userId: string, weight: number, date: string, note?: string) {
+	const [year, month, day] = date.split('-').map(Number);
+	const localDate = new Date(year, month - 1, day, 12, 0, 0, 0);
+
 	const entry = await prisma.weightEntry.create({
 		data: {
 			id: crypto.randomUUID(),
 			userId,
 			weight,
-			date: new Date(date),
+			date: localDate,
 			note,
 		},
 	});

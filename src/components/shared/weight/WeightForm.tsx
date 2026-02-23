@@ -25,10 +25,15 @@ export default function WeightForm() {
 		setError("");
 
 		try {
+			const year = date.getFullYear();
+			const month = String(date.getMonth() + 1).padStart(2, '0');
+			const day = String(date.getDate()).padStart(2, '0');
+			const dateString = `${year}-${month}-${day}`;
+
 			const response = await fetch("/api/weight", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ weight: parseFloat(weight), date, note })
+				body: JSON.stringify({ weight: parseFloat(weight), date: dateString, note })
 			});
 
 			if (!response.ok) {
@@ -78,7 +83,7 @@ export default function WeightForm() {
 								type="button"
 								variant="outline"
 								data-empty={!date}
-								className="data-[empty=true]:text-muted-foreground w-70 justify-start text-left font-normal"
+								className="data-[empty=true]:text-muted-foreground w-full justify-start text-left font-normal"
 							>
 								<CalendarIcon />
 								<span className="capitalize">{date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
