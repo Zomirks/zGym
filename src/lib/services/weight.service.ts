@@ -24,3 +24,17 @@ export async function addWeightEntry(userId: string, weight: number, date: strin
 	});
 	return entry;
 }
+
+export async function deleteWeightEntry(entryId: string, userId: string) {
+	const deletedEntry = await prisma.weightEntry.delete({
+		where: {
+			id: entryId,
+			userId
+		},
+		select: {
+			date: true,
+			weight: true
+		}
+	});
+	return deletedEntry;
+}

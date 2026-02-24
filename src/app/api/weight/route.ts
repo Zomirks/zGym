@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
-import { addWeightEntry, getWeightEntries } from "@/lib/services/weight.service";
+import { addWeightEntry, getWeightEntries, deleteWeightEntry } from "@/lib/services/weight.service";
 import { auth } from "@/lib/auth";
 
 export async function GET(request: Request) {
@@ -37,4 +37,28 @@ export async function POST(request: Request) {
 	const newWeightEntry = await addWeightEntry(session.user.id, body.weight, body.date, body.note);
 
 	return NextResponse.json(newWeightEntry, {status: 201});
+}
+
+export async function DELETE(request: Request) {
+	const session = await auth.api.getSession({
+		headers: await headers(),
+	});
+
+	if (!session) {
+		return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
+	}
+
+	const { searchParams } = new URL(request.url);
+	const entryId = searchParams.get("id");
+
+	if (entryId) {
+		try {
+			const deleted = await deleteWeightEntry(entryId, session.user.id);
+			return NextResponse.json(deleted);
+		} catch {
+			return NextResponse.json({ error: "Entrée non trouvée" }, { status: 404 });
+		}
+	} else {
+		return NextResponse.json({ error: "Aucune entrée n'a été spécifiée pour être supprimée" }, { status: 400 });
+	}
 }

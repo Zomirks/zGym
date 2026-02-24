@@ -1,3 +1,4 @@
+import DeleteWeightButton from "./DeleteWeightButton";
 import { Card } from "@/components/ui/card";
 import { Info as InfoIcon } from "lucide-react";
 import { Popover, PopoverTrigger, PopoverTitle, PopoverHeader, PopoverContent } from "@/components/ui/popover";
@@ -41,7 +42,10 @@ const WeightLastEntries = async () => {
 							)}
 						</div>
 
+						<div>
 						<span className="font-semibold">{entry.weight} kg</span>
+							<DeleteWeightButton entryId={entry.id}/>
+						</div>
 					</div>
 				</div>
 			))}
