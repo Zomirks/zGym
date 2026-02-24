@@ -1,10 +1,19 @@
-import DeleteWeightButton from "./DeleteWeightButton";
-import { Card } from "@/components/ui/card";
-import { Info as InfoIcon } from "lucide-react";
-import { Popover, PopoverTrigger, PopoverTitle, PopoverHeader, PopoverContent } from "@/components/ui/popover";
-import { getWeightEntries } from "@/lib/services/weight.service";
-import { auth } from "@/lib/auth";
+// Next
 import { headers } from "next/headers";
+
+// Components
+import DeleteWeightButton from "./DeleteWeightButton";
+
+// Components - UI
+import { Card } from "@/components/ui/card";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+
+// Icons
+import { Info as InfoIcon } from "lucide-react";
+
+// Lib
+import { auth } from "@/lib/auth";
+import { getWeightEntries } from "@/lib/services/weight.service";
 
 const WeightLastEntries = async () => {
 	const session = await auth.api.getSession({ headers: await headers() });
@@ -29,21 +38,19 @@ const WeightLastEntries = async () => {
 							})}
 
 							{entry.note && (
-								<Popover>
-									<PopoverTrigger asChild>
+								<Tooltip>
+									<TooltipTrigger>
 										<InfoIcon size={14} />
-									</PopoverTrigger>
-									<PopoverContent>
-										<PopoverHeader>
-											<PopoverTitle>{entry.note}</PopoverTitle>
-										</PopoverHeader>
-									</PopoverContent>
-								</Popover>
+									</TooltipTrigger>
+									<TooltipContent>
+										{entry.note}
+									</TooltipContent>
+								</Tooltip>
 							)}
 						</div>
 
 						<div>
-						<span className="font-semibold">{entry.weight} kg</span>
+							<span className="font-semibold">{entry.weight} kg</span>
 							<DeleteWeightButton entryId={entry.id}/>
 						</div>
 					</div>
