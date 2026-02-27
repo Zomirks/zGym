@@ -1,16 +1,23 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Bebas_Neue, Lora, Space_Mono } from "next/font/google";
 import "./globals.css";
 import Layout from "@/components/shared/Layout";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
-const geistSans = Geist({
-	variable: "--font-geist-sans",
+const bebasNeue = Bebas_Neue({
+	variable: "--font-bebas-neue",
+	weight: "400",
 	subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-	variable: "--font-geist-mono",
+const lora = Lora({
+	variable: "--font-lora",
+	subsets: ["latin"],
+});
+
+const spaceMono = Space_Mono({
+	variable: "--font-space-mono",
+	weight: ["400", "700"],
 	subsets: ["latin"],
 });
 
@@ -25,7 +32,7 @@ export default function RootLayout({children}: Readonly<{
 	return (
 		<html lang="en">
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+				className={`${bebasNeue.variable} ${lora.variable} ${spaceMono.variable} antialiased dark`}
 			>
 				<TooltipProvider>
 					<Layout>

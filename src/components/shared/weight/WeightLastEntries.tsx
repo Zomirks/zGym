@@ -26,7 +26,7 @@ const WeightLastEntries = async () => {
 
 	return (
 		<Card className="flex flex-col gap-2 py-3 px-4">
-			<h3 className="font-semibold">Dernière données enregistrées</h3>
+			<h3 className="font-poster text-lg">Dernière données enregistrées</h3>
 			{entries.map((entry) => (
 				<div key={entry.id}>
 					<div className="flex items-center justify-between">
@@ -50,7 +50,7 @@ const WeightLastEntries = async () => {
 						</div>
 
 						<div>
-							<span className="font-semibold">{entry.weight} kg</span>
+							<span className="font-data font-semibold">{entry.weight} kg</span>
 							<DeleteWeightButton entryId={entry.id}/>
 						</div>
 					</div>
