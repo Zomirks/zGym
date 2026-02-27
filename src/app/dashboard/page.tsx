@@ -2,9 +2,16 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
+// COMPONENT - UI
 import WeightCalendar from "@/components/shared/weight/WeightCalendar";
 import WeightForm from "@/components/shared/weight/WeightForm";
 import WeightLastEntries from "@/components/shared/weight/WeightLastEntries";
+import WeightChart from "@/components/shared/weight/WeightChart";
+// LIB
+import { getWeightEntries } from "@/lib/services/weight.service";
+
+// TYPES
+import { WeightDataPoint } from "@/types/weight";
 
 const Dashboard = async () => {
 	const session = await auth.api.getSession({
@@ -15,6 +22,17 @@ const Dashboard = async () => {
 		redirect("/login");
 	}
 	
+	const entries = await getWeightEntries(session.user.id, 7);
+	const chartData: WeightDataPoint[] = entries
+		.map((entry) => ({
+			date: entry.date.toLocaleDateString("fr-FR", {
+				day: "numeric",
+				month: "short",
+			}),
+			weight: entry.weight,
+		}))
+		.reverse();
+
 	return (
 		<div>
 			Bonjour {session.user.name!}
@@ -27,6 +45,7 @@ const Dashboard = async () => {
 						<p>Une seule pesée ne veut rien dire : notre poids varie chaque jour (eau, sel, digestion, repas plus riche…). Se peser une fois par mois peut nous tromper — surtout si ça tombe juste après un écart — alors que notre progression était bonne.</p>
 						<p>En se pesant souvent, on fais une moyenne sur la semaine et on observes la vraie tendance, pas les fluctuations.</p>
 					</div>
+								<WeightChart data={chartData} />
 				</div>
 
 				<div></div>
