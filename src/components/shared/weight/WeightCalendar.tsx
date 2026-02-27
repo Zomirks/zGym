@@ -1,7 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Calendar } from "@/components/ui/calendar";
+import { Calendar, CalendarDayButton } from "@/components/ui/calendar";
 import { fr } from "date-fns/locale";
+import { Check as CheckIcon } from "lucide-react";
 
 const WeightCalendar = () => {
 	const [mounted, setMounted] = useState(false);
@@ -40,10 +41,19 @@ const WeightCalendar = () => {
 				modifiers={{
 					entries: entryDates,
 				}}
-				modifiersClassNames={{
-					entries: "bg-green-500/20 rounded-md",
-				}}
 				className="w-full rounded-lg border"
+				components={{
+					DayButton: ({ children, modifiers, day, ...props }) => {
+						return (
+							<CalendarDayButton day={day} modifiers={modifiers} {...props} className="relative overflow-visible">
+								{children}
+								{modifiers.entries && (
+									<CheckIcon className="text-primary absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-80 size-8"/>
+								)}
+							</CalendarDayButton>
+						)
+					},
+				}}
 			/>
 		</>
 	);
