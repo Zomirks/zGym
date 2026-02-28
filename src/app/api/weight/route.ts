@@ -1,55 +1,43 @@
-import { NextResponse } from "next/server";
-import { headers } from "next/headers";
+import { NextRequest, NextResponse } from "next/server";
+
+// LIB
+import { requireSession } from "@/lib/api-utils";
 import { addWeightEntry, getWeightEntries, deleteWeightEntry } from "@/lib/services/weight.service";
-import { auth } from "@/lib/auth";
 
-export async function GET(request: Request) {
-	const session = await auth.api.getSession({
-		headers: await headers(),
-	});
+export async function GET(request: NextRequest) {
+	const { session, error } = await requireSession();
+	if (error) return error
 
-	if (!session) {
-		return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
-	}
-
-	const { searchParams } = new URL(request.url);
-	const limit = searchParams.get("limit") ? Number(searchParams.get("limit")) : undefined;
+	const limitParam = request.nextUrl.searchParams.get("limit");
+	const limit = limitParam ? Number(limitParam) : undefined;
 
 	const weightEntries = await getWeightEntries(session.user.id, limit);
 
 	return NextResponse.json(weightEntries);
 }
 
-export async function POST(request: Request) {
-	const session = await auth.api.getSession({
-		headers: await headers(),
-	});
-
-	if (!session) {
-		return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
-	}
+export async function POST(request: NextRequest) {
+	const { session, error } = await requireSession();
+	if (error) return error
 
 	const body = await request.json();
 	if (typeof body.weight != 'number') {
 		return NextResponse.json({ error: "Le poids n'est pas renseigné correctement" }, { status: 400 });
 	}
 
-	const newWeightEntry = await addWeightEntry(session.user.id, body.weight, body.date, body.note);
-
-	return NextResponse.json(newWeightEntry, {status: 201});
+	try {
+		const newWeightEntry = await addWeightEntry(session.user.id, body.weight, body.date, body.note);
+		return NextResponse.json(newWeightEntry, {status: 201});
+	} catch (error) {
+		return NextResponse.json({ error: "Votre poids n'a pas pu être enregistré" }, { status: 500 });
+	}
 }
 
-export async function DELETE(request: Request) {
-	const session = await auth.api.getSession({
-		headers: await headers(),
-	});
+export async function DELETE(request: NextRequest) {
+	const { session, error } = await requireSession();
+	if (error) return error
 
-	if (!session) {
-		return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
-	}
-
-	const { searchParams } = new URL(request.url);
-	const entryId = searchParams.get("id");
+	const entryId = request.nextUrl.searchParams.get("id");
 
 	if (entryId) {
 		try {

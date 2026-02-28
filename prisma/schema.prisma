@@ -23,14 +23,14 @@ model User {
 }
 
 model WeightEntry {
-	id String @id
-	weight Float
-	date DateTime @default(now())
-	note String?
-	userId String
-	user User @relation(fields: [userId], references: [id])
+	id 		String 		@id @default(cuid())
+	weight 	Float
+	date 	DateTime 	@db.Date @default(now())
+	note 	String?
+	userId 	String
+	user 	User 		@relation(fields: [userId], references: [id])
 	
-	@@index([userId, date])
+	@@unique([userId, date])
 }
 
 model Session {

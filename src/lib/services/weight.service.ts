@@ -1,4 +1,4 @@
-import prisma from "../prisma";
+import prisma from "@/lib/prisma";
 
 export async function getWeightEntries(userId: string, limit?: number) {
 	const entries = await prisma.weightEntry.findMany({
@@ -13,14 +13,19 @@ export async function addWeightEntry(userId: string, weight: number, date: strin
 	const [year, month, day] = date.split('-').map(Number);
 	const localDate = new Date(year, month - 1, day, 12, 0, 0, 0);
 
-	const entry = await prisma.weightEntry.create({
-		data: {
+	const entry = await prisma.weightEntry.upsert({
+		where: { userId_date: { userId, date: localDate } },
+		create: {
 			id: crypto.randomUUID(),
 			userId,
 			weight,
 			date: localDate,
 			note,
 		},
+		update: {
+			weight,
+			note
+		}
 	});
 	return entry;
 }
