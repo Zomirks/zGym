@@ -44,9 +44,9 @@ export async function DELETE(request: NextRequest) {
 			const deleted = await deleteWeightEntry(entryId, session.user.id);
 			return NextResponse.json(deleted);
 		} catch {
-			return NextResponse.json({ error: "Entrée non trouvée" }, { status: 404 });
+			return NextResponse.json({ error: "Donnée non trouvée" }, { status: 404 });
 		}
 	} else {
-		return NextResponse.json({ error: "Aucune entrée n'a été spécifiée pour être supprimée" }, { status: 400 });
+		return NextResponse.json({ error: "Aucune donnée n'a été spécifiée pour être supprimée" }, { status: 400 });
 	}
 }

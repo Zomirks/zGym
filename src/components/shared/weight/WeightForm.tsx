@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-// Components
-import { Button } from "@/components/ui/button";
+// COMPONENTS - UI
+import { Button } from "@/components/shared/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -12,7 +12,7 @@ import { InputGroup, InputGroupInput, InputGroupAddon } from "@/components/ui/in
 import { Label } from "@/components/ui/label";
 import { Popover, PopoverContent, PopoverTrigger, } from "@/components/ui/popover"
 
-// Icons
+// ICONS
 import { Calendar as CalendarIcon, Check as CheckIcon } from "lucide-react"
 
 export default function WeightForm() {
@@ -73,9 +73,26 @@ export default function WeightForm() {
 			</Card>
 		) : (
 			<Card className="px-4">
-				<form onSubmit={handleSubmit} className="flex flex-col gap-y-4">
-					{error && <p style={{ color: "red" }}>{error}</p>}
+				<div className="">
+					<div className="flex items-center gap-2 font-data text-[10px] text-zgym-gold/85 tracking-[0.25em] uppercase mb-2">
+						<span className="inline-block w-6 h-px bg-zgym-gold/50" />
+						Suivi du poids
+					</div>
+					<h3 className="font-poster text-3xl tracking-[0.06em] uppercase text-zgym-text-1 leading-none">
+						Nouvelle mesure
+					</h3>
+				</div>
 
+				{error && (
+					<div className="flex items-center gap-2 bg-zgym-brick/10 border border-zgym-brick/30 rounded-lg px-3 py-2 mb-5">
+						<span className="text-zgym-brick text-sm">◆</span>
+						<span className="font-body text-sm italic text-zgym-brick">
+							{error}
+						</span>
+					</div>
+				)}
+
+				<form onSubmit={handleSubmit} className="flex flex-col gap-y-4">
 					<div className="flex flex-col gap-y-2">
 						<Label htmlFor="weight">Ton poids</Label>
 						<InputGroup>
@@ -88,7 +105,7 @@ export default function WeightForm() {
 								onChange={(e) => setWeight(e.target.value)}
 								required
 							/>
-							<InputGroupAddon align="inline-end">
+							<InputGroupAddon className="font-data" align="inline-end">
 								KG
 							</InputGroupAddon>
 						</InputGroup>
@@ -115,7 +132,12 @@ export default function WeightForm() {
 					</div>
 
 					<div className="flex flex-col gap-y-2">
-						<Label htmlFor="note">Note</Label>
+						<Label htmlFor="note">
+							Note
+							<span className="ml-1 opacity-50 italic text-xs">
+								— optionnel
+							</span>
+						</Label>
 						<Input
 							id="note"
 							type="text"
