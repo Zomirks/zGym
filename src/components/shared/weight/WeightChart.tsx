@@ -28,7 +28,7 @@ export default function WeightChart({ data }: { data: WeightDataPoint[] }) {
 
 	return (
 		<Card className="p-4">
-			<h3 className="font-poster text-2xl mb-4">Évolution du poids</h3>
+			<h3 className="font-display text-2xl mb-4">Évolution du poids</h3>
 			<ChartContainer config={chartConfig} className="min-h-75 w-full">
 				<LineChart data={data}>
 					<CartesianGrid vertical={false} />
