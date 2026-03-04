@@ -8,17 +8,20 @@ const bebasNeue = Bebas_Neue({
 	variable: "--font-bebas-neue",
 	weight: "400",
 	subsets: ["latin"],
+	display: 'swap',
 });
 
 const lora = Lora({
 	variable: "--font-lora",
 	subsets: ["latin"],
+	display: 'swap',
 });
 
 const spaceMono = Space_Mono({
 	variable: "--font-space-mono",
 	weight: ["400", "700"],
 	subsets: ["latin"],
+	display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -32,7 +35,7 @@ export default function RootLayout({children}: Readonly<{
 	return (
 		<html lang="en">
 			<body
-				className={`${bebasNeue.variable} ${lora.variable} ${spaceMono.variable} antialiased dark`}
+				className={`${bebasNeue.variable} ${lora.variable} ${spaceMono.variable} antialiased`}
 			>
 				<TooltipProvider>
 					<Layout>
