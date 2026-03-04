@@ -5,185 +5,150 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  /* — Fonts — */
-  --font-poster: var(--font-bebas-neue);
-  --font-body:   var(--font-lora);
-  --font-data:   var(--font-space-mono);
+	/* — Fonts — */
+	--font-display:	var(--font-bebas-neue), sans-serif;
+	--font-serif: 	var(--font-lora), Georgia, serif;
+	--font-data: 	var(--font-space-mono), monospace;
 
-  /* — ShadCN semantic tokens (required by components) — */
-  --color-background:              var(--background);
-  --color-foreground:              var(--foreground);
-  --color-card:                    var(--card);
-  --color-card-foreground:         var(--card-foreground);
-  --color-popover:                 var(--popover);
-  --color-popover-foreground:      var(--popover-foreground);
-  --color-primary:                 var(--primary);
-  --color-primary-foreground:      var(--primary-foreground);
-  --color-secondary:               var(--secondary);
-  --color-secondary-foreground:    var(--secondary-foreground);
-  --color-muted:                   var(--muted);
-  --color-muted-foreground:        var(--muted-foreground);
-  --color-accent:                  var(--accent);
-  --color-accent-foreground:       var(--accent-foreground);
-  --color-destructive:             var(--destructive);
-  --color-border:                  var(--border);
-  --color-input:                   var(--input);
-  --color-ring:                    var(--ring);
-  --color-chart-1:                 var(--chart-1);
-  --color-chart-2:                 var(--chart-2);
-  --color-chart-3:                 var(--chart-3);
-  --color-chart-4:                 var(--chart-4);
-  --color-chart-5:                 var(--chart-5);
-  --color-sidebar:                 var(--sidebar);
-  --color-sidebar-foreground:      var(--sidebar-foreground);
-  --color-sidebar-primary:         var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent:          var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border:          var(--sidebar-border);
-  --color-sidebar-ring:            var(--sidebar-ring);
+	/* — ShadCN semantic tokens (required by components) — */
+	--color-background:             var(--background);
+	--color-foreground:             var(--foreground);
+	--color-card:                   var(--card);
+	--color-card-foreground:        var(--card-foreground);
+	--color-popover:                var(--popover);
+	--color-popover-foreground:     var(--popover-foreground);
+	--color-primary:                var(--primary);
+	--color-primary-foreground:     var(--primary-foreground);
+	--color-secondary:              var(--secondary);
+	--color-secondary-foreground:   var(--secondary-foreground);
+	--color-muted:                  var(--muted);
+	--color-muted-foreground:       var(--muted-foreground);
+	--color-accent:                 var(--accent);
+	--color-accent-foreground:      var(--accent-foreground);
+	--color-destructive:            var(--destructive);
+	--color-border:                 var(--border);
+	--color-input:                  var(--input);
+	--color-ring:                   var(--ring);
+	--color-chart-1:                var(--chart-1);
+	--color-chart-2:                var(--chart-2);
+	--color-chart-3:                var(--chart-3);
+	--color-chart-4:                var(--chart-4);
 
-  /* — Radii — */
-  --radius-xs:  4px;
-  --radius-sm:  8px;
-  --radius-md:  12px;
-  --radius-lg:  18px;
-  --radius-xl:  24px;
+	/* Radius */
+	--radius-sm: 	calc(var(--radius) - 1rem);   /* ~0.5rem */
+	--radius-md: 	calc(var(--radius) - 0.5rem); /* ~1rem */
+	--radius-lg:	var(--radius);
+	--radius-xl:	calc(var(--radius) + 0.5rem);
+	
+	/* Font sizes */
+	--font-size-display-hero: 	 clamp(3rem, 8vw, 7rem);
+	--font-size-display-section: clamp(1.75rem, 4vw, 3rem);
+	--font-size-body-lg:       	 1.125rem;
+	--font-size-body:          	 1rem;
+	--font-size-caption:		 0.75rem;
 
-  /* — zGym brand colors — bg-zgym-*, text-zgym-*, etc. — */
-  --color-zgym-bg:        var(--zgym-bg);
-  --color-zgym-bg-2:      var(--zgym-bg-2);
-  --color-zgym-surface:   var(--zgym-bg-surface);
-  --color-zgym-lifted:    var(--zgym-bg-lifted);
+	/* Line-height */
+	--line-height-tight:  1.1;
+	--line-height-normal: 1.5;
+	--line-height-loose:  1.75;
 
-  --color-zgym-effort:    var(--zgym-effort);
-  --color-zgym-recovery:  var(--zgym-recovery);
-  --color-zgym-focus:     var(--zgym-focus);
-  --color-zgym-energy:    var(--zgym-energy);
-  --color-zgym-strength:  var(--zgym-strength);
+	/* Font Weight */
+	--font-weight-display: 400;
+	--font-weight-body:    400;
+	--font-weight-bold:    600;
 
-  --color-zgym-gold:      var(--zgym-gold);
-  --color-zgym-brick:     var(--zgym-brick);
-  --color-zgym-moss:      var(--zgym-moss);
-  --color-zgym-sienna:    var(--zgym-sienna);
+	/* Spacing */
+	--spacing-section: 5rem;     /* entre sections */
+	--spacing-card-pad: 1.5rem;  /* padding interne cards */
+	--spacing-gap-grid: 1rem;    /* gap grilles */
+	
+	/* — zGym Backgrounds — bg-base / bg-surface / bg-lifted */
+	--color-base:    var(--bg-primary);
+	--color-surface: var(--bg-surface);
+	--color-lifted:  var(--bg-lifted);
 
-  --color-zgym-text-1:    var(--zgym-text-1);
-  --color-zgym-text-2:    var(--zgym-text-2);
-  --color-zgym-text-3:    var(--zgym-text-3);
+	/* — zGym Card themes — bg-card-effort / bg-card-recovery … */
+	--color-card-effort:   var(--card-effort);
+	--color-card-recovery: var(--card-recovery);
+	--color-card-focus:    var(--card-focus);
+	--color-card-energy:   var(--card-energy);
+	--color-card-strength: var(--card-strength);
+
+	/* — zGym Accents — text-accent-gold / text-accent-brick / text-accent-moss */
+	--color-accent-gold:  var(--accent-gold);
+	--color-accent-brick: var(--accent-brick);
+	--color-accent-moss:  var(--accent-moss);
 }
 
 /* =========================================
    Raw design tokens — available everywhere
    ========================================= */
 :root {
-  /* Fonds */
-  --zgym-bg:          #0C0B09;
-  --zgym-bg-2:        #141210;
-  --zgym-bg-surface:  #1D1A15;
-  --zgym-bg-lifted:   #252018;
+	/* Backgrounds */
+	--bg-primary: #0C0B09;
+	--bg-surface: #1D1A15;
+	--bg-lifted: #252018;
+  
+	/* Card Themes */
+	--card-effort: #261510;
+	--card-recovery: #141C13;
+	--card-focus: #13151E;
+	--card-energy: #201A0C;
+	--card-strength: #1A1520;
+  
+	/* Accent Colors */
+	--accent-gold: #E8B030;
+	--accent-brick: #C84820;
+	--accent-moss: #8FA35E;
 
-  /* Cards */
-  --zgym-effort:    #261510;
-  --zgym-recovery:  #141C13;
-  --zgym-focus:     #13151E;
-  --zgym-energy:    #201A0C;
-  --zgym-strength:  #1A1520;
+	/* Text Colors */
+	--text-primary: #EDE8DC;
+	--text-secondary: #9A9080;
+	--text-muted: #7A7060;
 
-  /* Accents */
-  --zgym-gold:    #E8B030;
-  --zgym-brick:   #C84820;
-  --zgym-moss:    #7A8C50;
-  --zgym-sienna:  #A06030;
+	/* ——— ShadCN semantic tokens mapped to zGym ——— */
+	--background:           var(--bg-primary);
+	--foreground: 			var(--text-primary);
+	--card:                 var(--bg-surface);
+	--card-foreground:      var(--text-primary);
+	--popover:              var(--bg-surface);
+	--popover-foreground:   var(--text-primary);
+	--primary:              var(--accent-gold);
+	--primary-foreground:   var(--bg-primary);
+	--secondary:            var(--text-secondary);
+    --secondary-foreground: var(--text-primary);
+	--destructive:          var(--accent-brick);
+	--muted:            	var(--bg-lifted);
+    --muted-foreground: 	var(--text-muted);
+	--accent:            	var(--bg-lifted);
+    --accent-foreground: 	var(--text-primary);
+	--border:               rgba(237, 232, 220, 0.12);
+	--ring:                 var(--accent-gold);
+	--input: 				var(--bg-lifted);
+	--radius:				1.5rem;
 
-  /* Texte */
-  --zgym-text-1:  #EDE8DC;
-  --zgym-text-2:  #9A9080;
-  --zgym-text-3:  #5C5448;
-
-  /* ——— ShadCN semantic tokens mapped to zGym ——— */
-  --background:           var(--zgym-bg);
-  --foreground:           var(--zgym-text-1);
-  --card:                 var(--zgym-bg-surface);
-  --card-foreground:      var(--zgym-text-1);
-  --popover:              var(--zgym-bg-surface);
-  --popover-foreground:   var(--zgym-text-1);
-  --primary:              var(--zgym-gold);
-  --primary-foreground:   var(--zgym-bg);
-  --secondary:            var(--zgym-bg-lifted);
-  --secondary-foreground: var(--zgym-text-1);
-  --muted:                var(--zgym-bg-2);
-  --muted-foreground:     var(--zgym-text-2);
-  --accent:               var(--zgym-sienna);
-  --accent-foreground:    var(--zgym-text-1);
-  --destructive:          var(--zgym-brick);
-  --border:               color-mix(in srgb, var(--zgym-text-3) 30%, transparent);
-  --input:                var(--zgym-bg-lifted);
-  --ring:                 var(--zgym-gold);
-
-  /* Chart — palette vintage stade */
-  --chart-gold: var(--zgym-gold);
-  --chart-brick: var(--zgym-moss);
-  --chart-moss: var(--zgym-brick);
-  --chart-sienna: var(--zgym-sienna);
-  --chart-5: var(--zgym-text-2);
-
-  /* Sidebar */
-  --sidebar:                    var(--zgym-bg-2);
-  --sidebar-foreground:         var(--zgym-text-1);
-  --sidebar-primary:            var(--zgym-gold);
-  --sidebar-primary-foreground: var(--zgym-bg);
-  --sidebar-accent:             var(--zgym-bg-lifted);
-  --sidebar-accent-foreground:  var(--zgym-text-1);
-  --sidebar-border:             color-mix(in srgb, var(--zgym-text-3) 30%, transparent);
-  --sidebar-ring:               var(--zgym-gold);
-}
-
-/* Dark mode — mirrors :root since the app is always dark */
-.dark {
-  --background:           var(--zgym-bg);
-  --foreground:           var(--zgym-text-1);
-  --card:                 var(--zgym-bg-surface);
-  --card-foreground:      var(--zgym-text-1);
-  --popover:              var(--zgym-bg-surface);
-  --popover-foreground:   var(--zgym-text-1);
-  --primary:              var(--zgym-gold);
-  --primary-foreground:   var(--zgym-bg);
-  --secondary:            var(--zgym-bg-lifted);
-  --secondary-foreground: var(--zgym-text-1);
-  --muted:                var(--zgym-bg-2);
-  --muted-foreground:     var(--zgym-text-2);
-  --accent:               var(--zgym-sienna);
-  --accent-foreground:    var(--zgym-text-1);
-  --destructive:          var(--zgym-brick);
-  --border:               color-mix(in srgb, var(--zgym-text-3) 30%, transparent);
-  --input:                var(--zgym-bg-lifted);
-  --ring:                 var(--zgym-gold);
-
-  --chart-1: var(--zgym-gold);
-  --chart-2: var(--zgym-moss);
-  --chart-3: var(--zgym-brick);
-  --chart-4: var(--zgym-sienna);
-  --chart-5: var(--zgym-text-2);
-
-  --sidebar:                    var(--zgym-bg-2);
-  --sidebar-foreground:         var(--zgym-text-1);
-  --sidebar-primary:            var(--zgym-gold);
-  --sidebar-primary-foreground: var(--zgym-bg);
-  --sidebar-accent:             var(--zgym-bg-lifted);
-  --sidebar-accent-foreground:  var(--zgym-text-1);
-  --sidebar-border:             color-mix(in srgb, var(--zgym-text-3) 30%, transparent);
-  --sidebar-ring:               var(--zgym-gold);
+	--chart-gold: 	var(--accent-gold);
+	--chart-brick: 	var(--accent-brick);
+	--chart-moss:	var(--accent-moss);
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground font-body;
-  }
-  button:not(:disabled),
-  [role="button"]:not(:disabled) {
-    cursor: pointer;
-  }
+	* {
+		@apply border-border outline-ring/50;
+	}
+	body {
+		@apply bg-background text-foreground font-serif;
+		position: relative;
+		min-height: 100vh;
+	}
+	button:not(:disabled),
+	[role="button"]:not(:disabled) {
+		cursor: pointer;
+	}
+
+	h1, h2, h3, h4 {
+		font-family: var(--font-display);
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+	}
 }

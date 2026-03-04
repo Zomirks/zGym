@@ -50,19 +50,19 @@ const Dashboard = async () => {
 			Bonjour {session.user.name!}
 			
 			<div className="grid grid-cols-5 gap-5">
-				<div></div>
-
-				<div></div>
+				{/* <div></div>
+				<div></div> */}
 				
-				<Tabs defaultValue="weight" className="col-span-3">
+				{/* <Tabs defaultValue="weight" className="col-span-3"> */}
+				<Tabs defaultValue="weight" className="col-span-5">
 					<TabsList className="self-end">
 						<TabsTrigger value="weight">Poids</TabsTrigger>
 						<TabsTrigger value="calories">Calories</TabsTrigger>
 					</TabsList>
-					<TabsContent value="weight" className="grid grid-cols-6 gap-5 bg-zgym-focus rounded-xl p-4">
+					<TabsContent value="weight" className="grid grid-cols-6 gap-5 bg-card-focus rounded-xl p-4">
 						<div className="flex flex-col gap-4 col-span-4">
 							<Card className="p-6">
-								<h2 className="text-4xl text-primary font-poster font-semibold">Poids</h2>
+								<h2 className="text-4xl text-primary font-display font-semibold">Poids</h2>
 								<div className="flex flex-col gap-4 text-sm">
 									<p>Si on a un objectif de prise de masse ou de perte de poids, il faut se peser régulièrement.</p>
 									<p>Une seule pesée ne veut rien dire : notre poids varie chaque jour (eau, sel, digestion, repas plus riche…). Se peser une fois par mois peut nous tromper — surtout si ça tombe juste après un écart — alors que notre progression était bonne.</p>
@@ -79,7 +79,7 @@ const Dashboard = async () => {
 						</div>
 					</TabsContent>
 
-					<TabsContent value="calories" className="grid grid-cols-6 gap-5 bg-zgym-focus rounded-xl p-4">
+					<TabsContent value="calories" className="grid grid-cols-6 gap-5 bg-lifted rounded-xl p-4">
 						<div className="col-span-4">
 							<NutritionDaySummary date={new Date()} />
 						</div>
