@@ -10,50 +10,12 @@ import { Label } from "@/components/ui/label";
 import { Calendar } from "@/components/ui/calendar";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { InputWithAddon } from "@/components/ui/input-with-addon";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { SectionTag } from "@/components/ui/section-tag";
 
 // Icons
 import { Calendar as CalendarIcon, Check as CheckIcon, Utensils as UtensilsIcon } from "lucide-react";
-
-function InputWithAddon({
-	id,
-	value,
-	onChange,
-	addon,
-	min = 0,
-	step = 1,
-	placeholder,
-	required,
-}: {
-	id: string;
-	value: number;
-	onChange: (v: number) => void;
-	addon: string;
-	min?: number;
-	step?: number;
-	placeholder?: string;
-	required?: boolean;
-}) {
-	return (
-		<div className="relative">
-			<Input
-				id={id}
-				type="number"
-				min={min}
-				step={step}
-				value={value}
-				onChange={(e) => onChange(e.target.valueAsNumber)}
-				placeholder={placeholder}
-				required={required}
-				className="pr-16"
-			/>
-			<span className="absolute right-3 top-1/2 -translate-y-1/2 font-data text-[10px] tracking-widest uppercase text-muted-foreground pointer-events-none select-none">
-				{addon}
-			</span>
-		</div>
-	);
-}
 
 export default function ManualEntriesForm() {
 	const [calories, setCalories] = useState(0);
