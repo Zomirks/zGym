@@ -38,8 +38,7 @@ export const auth = betterAuth({
 					if(error) {
 						console.log("Resend Email-verification:", {data, error});
 					}
-				} else {
-					// Password reset
+				} else if (type === "forget-password") {
 					const { data, error } = await resend.emails.send({
 						from: 'zGym <noreply@zgym.cyril-fischer.fr>',
 						to: email,

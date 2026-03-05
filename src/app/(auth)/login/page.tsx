@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 // Components
 import { Button } from "@/components/ui/button";
@@ -47,7 +48,7 @@ const LoginPage = () => {
 				<Card className="px-6 pb-6 flex flex-col gap-y-5">
 					<div>
 						<SectionTag>Authentification</SectionTag>
-						<div className="flex items-end gap-3">
+						<div className="flex items-center gap-3">
 							<h3 className="font-display text-3xl tracking-[0.06em] uppercase leading-none text-foreground">
 								Connexion
 							</h3>
@@ -109,6 +110,9 @@ const LoginPage = () => {
 						</Button>
 					</form>
 				</Card>
+				<div className="mt-4 block text-center">
+					<Link href="/forgot-password" className="text-secondary hover:text-primary text-sm">Mot de passe oublié ?</Link>
+				</div>
 			</div>
 		</div>
 	);
