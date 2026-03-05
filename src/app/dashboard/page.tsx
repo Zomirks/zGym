@@ -48,20 +48,20 @@ const Dashboard = async () => {
 	return (
 		<div>
 			Bonjour {session.user.name!}
-			
+
 			<div className="grid grid-cols-5 gap-5">
 				{/* <div></div>
 				<div></div> */}
-				
+
 				{/* <Tabs defaultValue="weight" className="col-span-3"> */}
 				<Tabs defaultValue="weight" className="col-span-5">
 					<TabsList className="self-end">
 						<TabsTrigger value="weight">Poids</TabsTrigger>
 						<TabsTrigger value="calories">Calories</TabsTrigger>
 					</TabsList>
-					<TabsContent value="weight" className="grid grid-cols-6 gap-5 bg-card-focus rounded-xl p-4">
-						<div className="flex flex-col gap-4 col-span-4">
-							<Card className="p-6">
+					<TabsContent value="weight" className="flex flex-col md:flex-row gap-4 bg-card-focus rounded-xl p-4">
+						<div className="contents md:flex md:flex-col md:gap-4 md:flex-4">
+							<Card className="order-1 md:order-0 p-6">
 								<h2 className="text-4xl text-primary font-display font-semibold">Poids</h2>
 								<div className="flex flex-col gap-4 text-sm">
 									<p>Si on a un objectif de prise de masse ou de perte de poids, il faut se peser régulièrement.</p>
@@ -69,13 +69,23 @@ const Dashboard = async () => {
 									<p>En se pesant souvent, on fais une moyenne sur la semaine et on observes la vraie tendance, pas les fluctuations.</p>
 								</div>
 							</Card>
-							<WeightChart data={chartData} />
+							<div className="contents md:flex md:flex-row md:gap-4">
+								<div className="order-3 md:order-0 md:flex-2">
+									<WeightChart data={chartData} />
+								</div>
+								<div className="order-4 md:order-0 md:flex-1">
+									<WeightCalendar />
+								</div>
+							</div>
 						</div>
 
-						<div className="flex flex-col gap-4 col-span-2">
-							<WeightForm />
-							<WeightLastEntries />
-							<WeightCalendar />
+						<div className="contents md:flex md:flex-col md:gap-4 md:flex-2">
+							<div className="order-2 md:order-0">
+								<WeightForm />
+							</div>
+							<div className="order-5 md:order-0">
+								<WeightLastEntries />
+							</div>
 						</div>
 					</TabsContent>
 
