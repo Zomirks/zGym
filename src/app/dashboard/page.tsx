@@ -89,11 +89,11 @@ const Dashboard = async () => {
 						</div>
 					</TabsContent>
 
-					<TabsContent value="calories" className="grid grid-cols-6 gap-5 bg-lifted rounded-xl p-4">
-						<div className="col-span-4">
+					<TabsContent value="calories" className="grid grid-cols-6 gap-4 bg-card-energy rounded-xl p-4">
+						<div className="col-span-6 md:col-span-4">
 							<NutritionDaySummary date={new Date()} />
 						</div>
-						<div className="col-span-2">
+						<div className="col-span-6 md:col-span-2">
 							<ManualEntriesForm />
 						</div>
 					</TabsContent>
