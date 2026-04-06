@@ -39,7 +39,7 @@ const Dashboard = async () => {
 		.map((entry) => ({
 			date: entry.date.toLocaleDateString("fr-FR", {
 				day: "numeric",
-				month: "short",
+				month: "long",
 			}),
 			weight: entry.weight,
 		}))

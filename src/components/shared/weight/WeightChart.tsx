@@ -25,16 +25,22 @@ export default function WeightChart({ data }: { data: WeightDataPoint[] }) {
 	if (data.length === 0) {
 		return <p className="text-muted-foreground text-sm">Pas encore de données.</p>;
 	}
-
+	
 	return (
 		<Card className="p-4">
 			<h3 className="font-display text-2xl mb-4">Évolution du poids</h3>
 			<ChartContainer config={chartConfig} className="min-h-75 w-full">
 				<LineChart data={data}>
 					<CartesianGrid vertical={false} />
-					<XAxis dataKey="date" />
-					<YAxis domain={["dataMin - 2", "dataMax + 2"]} />
-					<ChartTooltip content={<ChartTooltipContent />} />
+					<XAxis dataKey="date"
+						tickMargin={12}
+					/>
+					<YAxis
+						tickMargin={12} 
+						domain={["dataMin - 5", "dataMax + 5"]}
+						tickFormatter={(value) => `${value} kg`}
+					/>
+					<ChartTooltip content={<ChartTooltipContent indicator="line" />} />
 					<Line
 						type="monotone"
 						dataKey="weight" 
