@@ -16,7 +16,7 @@ On crée un compte, rentres ses mesures, et on peut suivre son évolution dans l
 **1. Dépendances**
 
 ```bash
-npm install
+pnpm install
 ```
 
 **2. Variables d'environnement**
@@ -26,22 +26,22 @@ Copie `.env.example` en `.env` et remplis les valeurs
 **3. Base de données**
 
 ```bash
-npm run docker:up
-npx prisma migrate dev
+pnpm docker:up
+pnpm prisma migrate dev
 ```
 
 **4. Lancer**
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
 ## Scripts utiles
 
 | Commande | Description |
 |----------|-------------|
-| `npm run dev` | Serveur de développement |
-| `npm run build` | Build de production |
-| `npm run docker:up` | Démarre PostgreSQL |
-| `npm run docker:down` | Arrête PostgreSQL |
-| `npm run docker:logs` | Logs de la base de données |
+| `pnpm dev` | Serveur de développement |
+| `pnpm build` | Build de production |
+| `pnpm docker:up` | Démarre PostgreSQL |
+| `pnpm docker:down` | Arrête PostgreSQL |
+| `pnpm docker:logs` | Logs de la base de données |
