@@ -20,7 +20,7 @@ import WeightForm from "@/components/shared/weight/WeightForm";
 import WeightLastEntries from "@/components/shared/weight/WeightLastEntries";
 
 // LIB
-import { getWeightEntries } from "@/lib/services/weight.service";
+import { getWeightEntries, getWeightEntryDates } from "@/lib/services/weight.service";
 
 // TYPES
 import { WeightDataPoint } from "@/types/weight";
@@ -34,7 +34,11 @@ const Dashboard = async () => {
 		redirect("/login");
 	}
 
+	const now = new Date();
+	const today = new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()));
+
 	const entries = await getWeightEntries(session.user.id, 7);
+	const entryDates = await getWeightEntryDates(session.user.id);
 	const chartData: WeightDataPoint[] = entries
 		.map((entry) => ({
 			date: entry.date.toLocaleDateString("fr-FR", {
@@ -74,7 +78,7 @@ const Dashboard = async () => {
 									<WeightChart data={chartData} />
 								</div>
 								<div className="order-4 md:order-0 md:flex-1">
-									<WeightCalendar />
+									<WeightCalendar entryDates={entryDates} />
 								</div>
 							</div>
 						</div>
@@ -91,7 +95,7 @@ const Dashboard = async () => {
 
 					<TabsContent value="calories" className="grid grid-cols-6 gap-4 bg-card-energy rounded-xl p-4">
 						<div className="col-span-6 md:col-span-4">
-							<NutritionDaySummary date={new Date()} />
+							<NutritionDaySummary date={today} />
 						</div>
 						<div className="col-span-6 md:col-span-2">
 							<ManualEntriesForm />

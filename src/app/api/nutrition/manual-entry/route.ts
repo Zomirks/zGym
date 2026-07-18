@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 // LIB
-import { requireSession } from "@/lib/api-utils";
+import { requireSession, parseDateOnly, isDateOnly } from "@/lib/api-utils";
 import { addManualEntry, deleteManualEntry } from "@/lib/services/nutrition.service";
 
 export async function POST(request: NextRequest) {
@@ -18,9 +18,15 @@ export async function POST(request: NextRequest) {
 		)
 	}
 
+	if (!isDateOnly(date)) {
+		return NextResponse.json({ error: "La date fournie n'est pas valide" }, { status: 400 });
+	}
+
+	const parsedDate = parseDateOnly(date);
+
 	try {
 		const newNutrionManualEntry = await addManualEntry(session.user.id, {
-			calories, carbohydrates, description, fats, proteins, date: new Date(date)
+			calories, carbohydrates, description, fats, proteins, date: parsedDate
 		});
 
 		return NextResponse.json(newNutrionManualEntry, {status: 201});
