@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 // LIB
-import { requireSession } from "@/lib/api-utils";
+import { requireSession, parseDateOnly, isDateOnly } from "@/lib/api-utils";
 import { getDaySummary, updateSyncedData } from "@/lib/services/nutrition.service";
 
 export async function GET(request: NextRequest) {
@@ -10,11 +10,11 @@ export async function GET(request: NextRequest) {
 
 	const date = request.nextUrl.searchParams.get("date");
 
-	if (!date) {
-		return NextResponse.json({ error: "Une date est requise" }, { status: 400 });
+	if (!date || !isDateOnly(date)) {
+		return NextResponse.json({ error: "Une date valide est requise" }, { status: 400 });
 	}
 
-	const daySummary = await getDaySummary(session.user.id, new Date(date));
+	const daySummary = await getDaySummary(session.user.id, parseDateOnly(date));
 	return NextResponse.json(daySummary);
 }
 
@@ -31,9 +31,13 @@ export async function PATCH(request: NextRequest) {
 			{ status: 400 }
 		)
 	}
-	
+
+	if (!isDateOnly(date)) {
+		return NextResponse.json({ error: "La date fournie n'est pas valide" }, { status: 400 });
+	}
+
 	try {
-		const newSyncNutrionDay = await updateSyncedData(session.user.id, new Date(date), {
+		const newSyncNutrionDay = await updateSyncedData(session.user.id, parseDateOnly(date), {
 			calories, carbohydrates, fats, proteins
 		});
 

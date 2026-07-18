@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { fr } from "react-day-picker/locale";
 
 // COMPONENTS - UI
 import { Button } from "@/components/ui/button";
@@ -35,13 +36,18 @@ export default function ManualEntriesForm() {
 		setError(null);
 
 		try {
+			const year = date.getFullYear();
+			const month = String(date.getMonth() + 1).padStart(2, "0");
+			const day = String(date.getDate()).padStart(2, "0");
+			const dateString = `${year}-${month}-${day}`;
+
 			const response = await fetch("/api/nutrition/manual-entry", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({
 					calories,
 					carbohydrates,
-					date: date.toISOString(),
+					date: dateString,
 					description,
 					fats,
 					proteins,
@@ -167,7 +173,13 @@ export default function ManualEntriesForm() {
 							</Button>
 						</PopoverTrigger>
 						<PopoverContent className="w-auto p-0 bg-surface border-border">
-							<Calendar mode="single" required selected={date} onSelect={setDate} />
+							<Calendar
+								locale={fr}
+								mode="single"
+								onSelect={setDate}
+								selected={date}
+								required
+							/>
 						</PopoverContent>
 					</Popover>
 				</div>

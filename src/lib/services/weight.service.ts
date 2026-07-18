@@ -9,6 +9,15 @@ export async function getWeightEntries(userId: string, limit?: number) {
 	return entries;
 }
 
+export async function getWeightEntryDates(userId: string) {
+	const entries = await prisma.weightEntry.findMany({
+		where: { userId },
+		orderBy: { date: "desc" },
+		select: { date: true },
+	});
+	return entries.map((entry) => entry.date);
+}
+
 export async function addWeightEntry(userId: string, weight: number, date: string, note?: string) {
 	const [year, month, day] = date.split('-').map(Number);
 	const localDate = new Date(year, month - 1, day, 12, 0, 0, 0);

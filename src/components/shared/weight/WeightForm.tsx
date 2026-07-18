@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { fr } from "react-day-picker/locale";
 
 // COMPONENTS - UI
 import { Button } from "@/components/ui/button";
@@ -174,7 +175,13 @@ export default function WeightForm() {
 							</Button>
 						</PopoverTrigger>
 						<PopoverContent className="w-auto p-0 bg-surface border-border">
-							<Calendar mode="single" required selected={date} onSelect={setDate} />
+							<Calendar
+								locale={fr}
+								mode="single"
+								onSelect={setDate}
+								selected={date}
+								required
+							/>
 						</PopoverContent>
 					</Popover>
 				</div>
