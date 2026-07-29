@@ -2,17 +2,20 @@
 import { useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 // Components
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { InputGroup, InputGroupInput, InputGroupButton } from "@/components/ui/input-group";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import { SectionTag } from "@/components/ui/section-tag";
 import { Divider } from "@/components/ui/divider";
+import { Field, FieldLabel } from "@/components/ui/field";
 
 // Icons
-import { LogIn as LogInIcon } from "lucide-react";
+import { LogIn as LogInIcon, EyeIcon, EyeOffIcon } from "lucide-react";
 
 const LoginPage = () => {
 	const router = useRouter();
@@ -20,6 +23,7 @@ const LoginPage = () => {
 	const [password, setPassword] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
+	const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
 	const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -41,13 +45,17 @@ const LoginPage = () => {
 		}
 	};
 
+	const showPassword = () => {
+		setIsPasswordVisible((prev) => !prev);
+	}
+
 	return (
 		<div className="flex-1 flex items-center justify-center">
 			<div className="w-full max-w-md">
 				<Card className="px-6 pb-6 flex flex-col gap-y-5">
 					<div>
 						<SectionTag>Authentification</SectionTag>
-						<div className="flex items-end gap-3">
+						<div className="flex items-center gap-3">
 							<h3 className="font-display text-3xl tracking-[0.06em] uppercase leading-none text-foreground">
 								Connexion
 							</h3>
@@ -81,17 +89,27 @@ const LoginPage = () => {
 							/>
 						</div>
 
-						<div className="flex flex-col gap-y-2">
-							<Label htmlFor="password">Mot de passe</Label>
-							<Input
-								id="password"
-								type="password"
-								value={password}
-								placeholder="Votre mot de passe"
-								onChange={(e) => setPassword(e.target.value)}
-								required
-							/>
-						</div>
+						<Field>
+							<FieldLabel htmlFor="password">Mot de passe</FieldLabel>
+							<InputGroup>
+								<InputGroupInput
+									id="password"
+									type={isPasswordVisible ? "text" : "password"}
+									value={password}
+									placeholder="Votre mot de passe"
+									onChange={(e) => setPassword(e.target.value)}
+									required
+								/>
+								<InputGroupButton
+									type="button"
+									onClick={showPassword}
+									aria-label={isPasswordVisible ? "Masquer le mot de passe" : "Afficher le mot de passe"}
+								>
+									{isPasswordVisible ? <EyeIcon /> : <EyeOffIcon />}
+								</InputGroupButton>
+							</InputGroup>
+
+						</Field>
 
 						<Button
 							type="submit"
@@ -109,6 +127,9 @@ const LoginPage = () => {
 						</Button>
 					</form>
 				</Card>
+				<div className="mt-4 block text-center">
+					<Link href="/forgot-password" className="text-secondary hover:text-primary text-sm">Mot de passe oublié ?</Link>
+				</div>
 			</div>
 		</div>
 	);
