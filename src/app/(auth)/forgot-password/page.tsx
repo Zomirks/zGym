@@ -185,7 +185,7 @@ const ForgotPasswordPage = () => {
 							onSubmit={handleVerifyOTP}
 							className="flex flex-col gap-y-4"
 						>
-							<p className="font-serif text-sm text-muted-foreground italic leading-snug">Si un compte est associé à l'adresse ci-dessous, vous recevrez un code de vérification.</p>
+							<p className="font-serif text-sm text-muted-foreground italic leading-snug">Si un compte est associé à l&apos;adresse ci-dessous, vous recevrez un code de vérification.</p>
 							<p className="text-foreground font-medium text-center">{email}</p>
 
 							<div className="flex justify-center">
