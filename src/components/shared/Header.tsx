@@ -10,7 +10,6 @@ const Header = () => {
 	const router = useRouter();
 	const { data: session } = useSession();
 	const [isSigningOut, setIsSigningOut] = useState(false);
-	const name = session?.user.name;
 
 	const handleSignOut = async () => {
 		setIsSigningOut(true);
@@ -35,12 +34,6 @@ const Header = () => {
 			</div>
 			<div className="text-2xl font-semibold">zGym</div>
 			<div className="flex flex-1 items-center justify-end gap-4">
-				{session && (
-					<>
-						<p>Profile : {name}</p>
-					</>
-				)}
-
 				{session && (
 					<Button onClick={handleSignOut} disabled={isSigningOut} aria-label="Se déconnecter">
 						<Power />
