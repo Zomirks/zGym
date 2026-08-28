@@ -6,19 +6,20 @@ import { useRouter } from "next/navigation";
 // Components
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { InputGroup, InputGroupInput, InputGroupButton } from "@/components/ui/input-group";
 import {
 	InputOTP,
 	InputOTPGroup,
 	InputOTPSeparator,
 	InputOTPSlot,
 } from "@/components/ui/input-otp";
-import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import { SectionTag } from "@/components/ui/section-tag";
 import { Divider } from "@/components/ui/divider";
+import { Field, FieldLabel } from "@/components/ui/field";
 
 // Icons
-import { UserPlus as UserPlusIcon, ShieldCheck as ShieldCheckIcon } from "lucide-react";
+import { UserPlus as UserPlusIcon, ShieldCheck as ShieldCheckIcon, EyeIcon, EyeOffIcon } from "lucide-react";
 
 const RegisterPage = () => {
 	const router = useRouter();
@@ -26,6 +27,7 @@ const RegisterPage = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
+	const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 	const [error, setError] = useState<string | null>(null);
 	const [step, setStep] = useState<"register" | "verify-otp">("register");
 	const [otp, setOtp] = useState("");
@@ -80,6 +82,10 @@ const RegisterPage = () => {
 		router.refresh();
 	};
 
+	const showPassword = () => {
+		setIsPasswordVisible((prev) => !prev);
+	}
+
 	return (
 		<div className="flex-1 flex items-center justify-center">
 			<div className="w-full max-w-md">
@@ -126,8 +132,8 @@ const RegisterPage = () => {
 							onSubmit={handleSubmit}
 							className="flex flex-col gap-y-4"
 						>
-							<div className="flex flex-col gap-y-2">
-								<Label htmlFor="name">Nom</Label>
+							<Field>
+								<FieldLabel htmlFor="name">Nom</FieldLabel>
 								<Input
 									id="name"
 									type="text"
@@ -136,10 +142,10 @@ const RegisterPage = () => {
 									onChange={(e) => setName(e.target.value)}
 									required
 								/>
-							</div>
+							</Field>
 
-							<div className="flex flex-col gap-y-2">
-								<Label htmlFor="email">Adresse mail</Label>
+							<Field>
+								<FieldLabel htmlFor="email">Adresse mail</FieldLabel>
 								<Input
 									id="email"
 									type="email"
@@ -148,19 +154,28 @@ const RegisterPage = () => {
 									onChange={(e) => setEmail(e.target.value)}
 									required
 								/>
-							</div>
+							</Field>
 
-							<div className="flex flex-col gap-y-2">
-								<Label htmlFor="password">Mot de passe</Label>
-								<Input
-									id="password"
-									type="password"
-									value={password}
-									placeholder="Votre mot de passe"
-									onChange={(e) => setPassword(e.target.value)}
-									required
-								/>
-							</div>
+							<Field>
+								<FieldLabel htmlFor="password">Mot de passe</FieldLabel>
+								<InputGroup>
+									<InputGroupInput
+										id="password"
+										type={isPasswordVisible ? "text" : "password"}
+										value={password}
+										placeholder="Votre mot de passe"
+										onChange={(e) => setPassword(e.target.value)}
+										required
+									/>
+									<InputGroupButton
+										type="button"
+										onClick={showPassword}
+										aria-label={isPasswordVisible ? "Masquer le mot de passe" : "Afficher le mot de passe"}
+									>
+										{isPasswordVisible ? <EyeIcon /> : <EyeOffIcon />}
+									</InputGroupButton>
+								</InputGroup>
+							</Field>
 
 							<Button
 								type="submit"

@@ -183,12 +183,12 @@ const ForgotPasswordPage = () => {
 					{step === "otp" && (
 						<form
 							onSubmit={handleVerifyOTP}
-							className="flex flex-col gap-y-4"
+							className="flex flex-col"
 						>
 							<p className="font-serif text-sm text-muted-foreground italic leading-snug">Si un compte est associé à l&apos;adresse ci-dessous, vous recevrez un code de vérification.</p>
-							<p className="text-foreground font-medium text-center">{email}</p>
+							<p className="text-foreground font-medium text-center mt-2">{email}</p>
 
-							<div className="flex justify-center">
+							<div className="flex justify-center mt-4">
 								<InputOTP
 									maxLength={6}
 									value={otp}
@@ -211,7 +211,7 @@ const ForgotPasswordPage = () => {
 								</InputOTP>
 							</div>
 
-							<div className="flex items-center justify-between text-xs">
+							<div className="flex items-center justify-between text-xs mt-6">
 								<button
 									type="button"
 									onClick={() => {
@@ -240,7 +240,7 @@ const ForgotPasswordPage = () => {
 							<Button
 								type="submit"
 								disabled={isLoading || otp.length < 6}
-								className="w-full mt-1 text-xs tracking-[0.2em]"
+								className="w-full text-xs tracking-[0.2em] mt-2"
 							>
 								{isLoading ? (
 									<span className="flex items-center gap-2">

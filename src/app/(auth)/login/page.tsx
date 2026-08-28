@@ -108,7 +108,6 @@ const LoginPage = () => {
 									{isPasswordVisible ? <EyeIcon /> : <EyeOffIcon />}
 								</InputGroupButton>
 							</InputGroup>
-
 						</Field>
 
 						<Button
