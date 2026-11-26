@@ -29,6 +29,7 @@ export async function POST(request: NextRequest) {
 		const newWeightEntry = await addWeightEntry(session.user.id, body.weight, body.date, body.note);
 		return NextResponse.json(newWeightEntry, {status: 201});
 	} catch (error) {
+		console.error("POST /api/weight:", error);
 		return NextResponse.json({ error: "Votre poids n'a pas pu être enregistré" }, { status: 500 });
 	}
 }
