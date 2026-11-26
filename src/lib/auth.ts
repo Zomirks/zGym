@@ -14,8 +14,14 @@ export const auth = betterAuth({
         requireEmailVerification: true,
         minPasswordLength: 8,
     },
+    emailVerification: {
+        sendOnSignUp: false,
+        sendOnSignIn: true,
+        autoSignInAfterVerification: true,
+    },
 	plugins: [
 		emailOTP({
+			overrideDefaultEmailVerification: true,
 			async sendVerificationOTP({email, otp, type}) {
 				if (type === "sign-in") {
 					const { data, error } = await resend.emails.send({
