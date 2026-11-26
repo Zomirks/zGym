@@ -51,13 +51,7 @@ const Dashboard = async () => {
 
 	return (
 		<div>
-			Bonjour {session.user.name!}
-
 			<div className="grid grid-cols-5 gap-5">
-				{/* <div></div>
-				<div></div> */}
-
-				{/* <Tabs defaultValue="weight" className="col-span-3"> */}
 				<Tabs defaultValue="weight" className="col-span-5">
 					<TabsList className="self-end">
 						<TabsTrigger value="weight">Poids</TabsTrigger>

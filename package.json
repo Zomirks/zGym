@@ -13,12 +13,14 @@
     "docker:logs": "docker compose logs -f postgres"
   },
   "dependencies": {
+    "@better-auth/prisma-adapter": "^1.7.2",
     "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.8.0",
-    "better-auth": "^1.6.23",
+    "better-auth": "^1.7.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.4.0",
+    "input-otp": "^1.5.0",
     "lucide-react": "^1.24.0",
     "next": "^16.2.10",
     "radix-ui": "^1.6.2",
@@ -26,6 +28,7 @@
     "react-day-picker": "^10.0.1",
     "react-dom": "^19.2.7",
     "recharts": "^3.9.2",
+    "resend": "^6.24.0",
     "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {
@@ -36,7 +39,7 @@
     "babel-plugin-react-compiler": "^1.0.0",
     "dotenv": "^17.4.2",
     "eslint": "^9.39.5",
-    "eslint-config-next": "^16.2.10",
+    "eslint-config-next": "^16.2.12",
     "prisma": "^7.8.0",
     "shadcn": "^4.13.0",
     "tailwindcss": "^4.3.2",
